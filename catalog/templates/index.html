@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{%block homepage %}
+<div class ="container">
+    <div class =  "row">
+        <div class ="col-nd-4">
+            {% if request.user.is_authenticated %} 
+            <p>
+                welcome, {{request.user.username}} 
+                <a href="/logout/">Logout</a>
+
+            </p> 
+            {% endif %}
+        <div class= "col-nd-8">
+            <h4> Browse Products</h4>
+            <div class ="container">
+                <div class = "row">
+                    {% for product in products%}
+                    <div class="col">
+                        <div class= "card board-0 shadow">
+                            <a href="/product/{{product.id}}/"><img src="{{product.photo.url}}" class="card-img-top" alt="" style="height: 200px;width: auto;"></a>
+                            <div class="card-body">
+                                <h5 class="card-title text-center">{{product.name}}</h5>
+                                <p class="card-text text-center">Rs.{{product.price}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
